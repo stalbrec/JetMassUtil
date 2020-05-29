@@ -126,10 +126,23 @@ if(__name__ == "__main__"):
             "ptbins":[0.,100000.],
             "etabins":[0., 1.479, 9.],
             "pfflavours":["chargedH", "neutralH", "gamma", "other"]
+        },
+        "oldBinning":{
+            "ptbins":[0,10.,50.],
+            "etabins":[0.,0.522,1.305,5.191],
+            "pfflavours":["chargedH", "neutralH", "gamma", "other"]            
+        },
+        "threePtbins":{
+            "ptbins":[0,10.,50.,100.],
+            "etabins":[0.,0.522,1.305,5.191],
+            "pfflavours":["chargedH", "neutralH", "gamma", "other"]            
         }
     }
 
     for name,config in grids.items():
         this_grid = MassScaleGrid(name,config)
         this_grid.write_grid()
-        this_grid.write_varied_grid(0.1,'up')
+        this_grid.write_varied_grid("all1UP",(None,None,"all"),1.)
+        this_grid.write_varied_grid("all1p5DOWN",(None,None,"all"),-1.5)
+        this_grid.write_varied_grid("chH_pt02_eta0_1p5DOWN",([0,2],[0],["chargedH","other"]),-1.5)
+        
